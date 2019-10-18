@@ -1,4 +1,4 @@
-//À¶ÑÀĞ¡³µ£¬arduino IDEÊµÏÖ
+//è“ç‰™å°è½¦
 #include<stdio.h>
 #define STOP 0
 #define FORWARD 1
@@ -14,39 +14,38 @@ int leftMotor1 = 4;
 int leftMotor2 = 2;
 int rightMotor1 = 8;
 int rightMotor2 = 7;
-//Ardunio¶Ë¿Ú
+//Ardunioç«¯å£
 int leftEn = 10;
 int rightEn = 11;
-//×óÓÒÂÖÌ¥pwmÊä³ö¶Ë¿Ú
+//å·¦å³è½®èƒpwmè¾“å‡ºç«¯å£
 
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
-  //ÉèÖÃÀ¶ÑÀ¶Ë¿Ú²¨ÌØÂÊ
   pinMode(leftMotor1, OUTPUT);
   pinMode(leftMotor2, OUTPUT);
   pinMode(rightMotor1, OUTPUT);
   pinMode(rightMotor2, OUTPUT);
   pinMode(leftPWM, OUTPUT);
   pinMode(rightPWM, OUTPUT);
-  //½«Ardunio¶Ë¿Ú×÷ÎªÊä³ö¶ËÏòÇı¶¯Ä£¿éÊä³ö
+  //å°†Ardunioç«¯å£ä½œä¸ºè¾“å‡ºç«¯å‘é©±åŠ¨æ¨¡å—è¾“å‡º
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
   if(Serial.available()>0)
   {
-    char cmd = Serial.read();//½ÓÊÜÊÖ»ú·¢ËÍµÄĞÅÏ¢
+    char cmd = Serial.read();
 
     Serial.print(cmd);
-    Run(cmd);//¸ù¾İÊÖ»ú·¢ËÍµÄĞÅÏ¢Çı¶¯Ğ¡³µ½øĞĞ²»Í¬µÄÔË¶¯
+    Run(cmd);
   }
 }
 void Run(int cmd)
 {
   analogWrite(leftPWM, 250);
   analogWrite(rightPWM, 200);
-  //ÅäÆ½Á½²àÂÖÌ¥ËÙ¶È£¬±£Ö¤Õı³£Ö±ĞĞºÍºóÍË
+  //é…å¹³ä¸¤ä¾§è½®èƒé€Ÿåº¦ï¼Œä¿è¯æ­£å¸¸ç›´è¡Œå’Œåé€€
   switch (cmd)
   {
     case STOP:
@@ -56,7 +55,6 @@ void Run(int cmd)
       digitalWrite(rightMotor1, LOW);
       digitalWrite(rightMotor2, LOW);
       break;
-    //É²³µ
     case FORWARD:
       Serial.println("FORWARD");
       digitalWrite(leftMotor1, HIGH);
@@ -64,7 +62,7 @@ void Run(int cmd)
       digitalWrite(rightMotor1, HIGH);
       digitalWrite(rightMotor2, LOW);
       break;
-    //Ö±ĞĞ
+    //ç›´è¡Œ
     case BACKWARD:
       Serial.println("BACKWARD");
       digitalWrite(leftMotor1, LOW);
@@ -72,7 +70,7 @@ void Run(int cmd)
       digitalWrite(rightMotor1, LOW);
       digitalWrite(rightMotor2, HIGH);
       break;
-    //µ¹ÍË
+    //å€’é€€
     case TURNLEFT:
       Serial.println("TURNLEFT");
       digitalWrite(leftMotor1, LOW);
@@ -80,7 +78,7 @@ void Run(int cmd)
       digitalWrite(rightMotor1, HIGH);
       digitalWrite(rightMotor2, LOW);
       break;
-    //×ó×ª
+    //å·¦è½¬
     case TURNRIGHT:
       Serial.println("TURNRIGHT");
       digitalWrite(leftMotor1, HIGH);
@@ -88,7 +86,7 @@ void Run(int cmd)
       digitalWrite(rightMotor1, LOW);
       digitalWrite(rightMotor2, LOW);
       break;
-    //ÓÒ×ª
+    //å³è½¬
     case BACKLEFT:
       Serial.println("BACKLEFT");
       digitalWrite(leftMotor1, LOW);
@@ -96,7 +94,7 @@ void Run(int cmd)
       digitalWrite(rightMotor1, LOW);
       digitalWrite(rightMotor2, HIGH);
       break;
-    //×óºó×ª
+    //å·¦åè½¬
     case BACKRIGHT:
       Serial.println("BACKRIGHT");
       digitalWrite(leftMotor1, LOW);
@@ -104,6 +102,7 @@ void Run(int cmd)
       digitalWrite(rightMotor1, LOW);
       digitalWrite(rightMotor2, LOW);
       break;
-      //ÓÒºó×ª
+      //å³åè½¬
   }
 }
+
