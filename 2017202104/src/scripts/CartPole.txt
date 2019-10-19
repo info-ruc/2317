@@ -1,0 +1,40 @@
+import gym
+
+#小车位置区间
+Cart_Position_LEFT = -2
+Cart_Position_RIGHT = 2
+#小棍最大角度为5°
+Cart_sin_Min = -0.034899
+Cart_sin_Max = 0.034899
+
+def take_action(observation):
+    car_pos, car_v, pole_sin, pole_v = observation
+    #小车位置不能太靠左或靠右
+    if car_pos < Cart_Position_LEFT:
+        return 1
+    elif car_pos > Cart_Position_RIGHT:
+        return 0
+    #小棍角度不能过大
+    if pole_sin < Cart_sin_Min:
+        return 0
+    elif pole_sin > Cart_sin_Max:
+        return 1
+    #根据小棍转动方向调整小车方向
+    if pole_v < 0.0:
+        return 0
+    else:
+        return 1
+    
+if __name__ == '__main__':
+    env = gym.make('CartPole-v0')
+    for i_episode in range(20):
+        observation = env.reset()
+        for step in range(1000):
+            env.render()
+            action = take_action(observation)
+            observation, reward, done, info = env.step(action)
+            if done:
+                take_action(observation1)
+                print("Episode finished after {} timesteps".format(step + 1), " ", i_episode, "reward: ", reward)
+                break
+    env.close()
